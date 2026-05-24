@@ -1,1 +1,0 @@
-<script src="Assets/js/core_script.js"></script>
