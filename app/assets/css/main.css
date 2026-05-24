@@ -1,0 +1,196 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    scroll-behavior: auto;
+  }
+
+  body {
+    @apply font-sans antialiased;
+    background: #f5f0e8;
+    color: #3d1010;
+    overflow-x: hidden;
+  }
+
+  ::selection {
+    background: rgba(201, 169, 110, 0.4);
+    color: #1a0507;
+  }
+
+  ::-webkit-scrollbar { width: 4px; }
+  ::-webkit-scrollbar-track { background: #f5f0e8; }
+  ::-webkit-scrollbar-thumb { background: rgba(61,16,16,0.3); border-radius: 2px; }
+}
+
+@layer components {
+  /* Centered narrow wrapper matching mobile invitation width */
+  .inv-wrap {
+    max-width: 440px;
+    margin: 0 auto;
+    position: relative;
+    overflow: hidden;
+    box-shadow: -1px 0 0 rgba(196,120,100,0.25), 1px 0 0 rgba(196,120,100,0.25);
+  }
+
+  /* Dark maroon section */
+  .section-dark {
+    background: linear-gradient(160deg, #2a080a 0%, #3d1010 40%, #2a080a 100%);
+    color: #f5f0e8;
+  }
+
+  /* Light cream section */
+  .section-cream {
+    background: #f5f0e8;
+    color: #3d1010;
+  }
+
+  /* Gold divider */
+  .divider {
+    width: 1px;
+    height: 60px;
+    background: linear-gradient(to bottom, transparent, #c9a96e, transparent);
+  }
+
+  .divider-h {
+    height: 1px;
+    width: 100%;
+    background: linear-gradient(to right, transparent, rgba(201,169,110,0.5), transparent);
+  }
+
+  /* Arch card shape */
+  .arch-card {
+    border-radius: 140px 140px 16px 16px;
+    overflow: hidden;
+  }
+
+  /* Pill outline button on dark */
+  .btn-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 28px;
+    border: 1px solid rgba(255,255,255,0.45);
+    border-radius: 100px;
+    font-size: 11px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: #f5f0e8;
+    background: transparent;
+    cursor: pointer;
+    transition: all 0.25s;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 500;
+  }
+  .btn-pill:hover {
+    background: rgba(255,255,255,0.12);
+    border-color: rgba(255,255,255,0.7);
+  }
+
+  /* Pill outline button on cream */
+  .btn-pill-dark {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 28px;
+    border: 1px solid rgba(61,16,16,0.4);
+    border-radius: 100px;
+    font-size: 11px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: #3d1010;
+    background: transparent;
+    cursor: pointer;
+    transition: all 0.25s;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 500;
+  }
+  .btn-pill-dark:hover {
+    background: rgba(61,16,16,0.06);
+  }
+
+  /* Profile rounded card */
+  .profile-card {
+    background: white;
+    border-radius: 24px;
+    overflow: hidden;
+    box-shadow: 0 12px 48px rgba(0,0,0,0.25);
+    position: relative;
+  }
+
+  /* Countdown pill box */
+  .cd-box {
+    background: white;
+    border-radius: 14px;
+    padding: 14px 18px;
+    min-width: 72px;
+    text-align: center;
+    box-shadow: 0 4px 24px rgba(0,0,0,0.18);
+  }
+
+  /* Input on cream */
+  .input-cream {
+    width: 100%;
+    padding: 12px 16px;
+    border: 1px solid rgba(61,16,16,0.2);
+    border-radius: 10px;
+    background: white;
+    font-size: 14px;
+    font-family: 'Poppins', sans-serif;
+    color: #3d1010;
+    outline: none;
+    transition: border-color 0.2s;
+  }
+  .input-cream:focus { border-color: #c9a96e; }
+  .input-cream::placeholder { color: rgba(61,16,16,0.35); }
+
+  /* Section tag label */
+  .sec-label {
+    font-size: 10px;
+    letter-spacing: 0.35em;
+    text-transform: uppercase;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 500;
+  }
+
+  /* Script heading */
+  .script-heading {
+    font-family: 'Dancing Script', cursive;
+    font-weight: 600;
+    line-height: 1.1;
+  }
+
+  /* Serif heading */
+  .serif-heading {
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 500;
+    line-height: 1.15;
+  }
+
+  /* Reveal animation */
+  .reveal {
+    opacity: 0;
+    transform: translateY(24px);
+  }
+  .revealed {
+    opacity: 1;
+    transform: translateY(0);
+    transition: opacity 0.7s ease, transform 0.7s ease;
+  }
+}
+
+/* Cover overlay transition */
+.cover-leave-active { transition: opacity 0.8s ease; }
+.cover-leave-to    { opacity: 0; }
+
+/* Main content fade-in */
+.main-enter-active { transition: opacity 0.8s ease 0.3s; }
+.main-enter-from   { opacity: 0; }
+
+/* Lenis */
+html.lenis,
+html.lenis body { height: auto; }
+.lenis.lenis-smooth { scroll-behavior: auto !important; }
+.lenis.lenis-smooth [data-lenis-prevent] { overscroll-behavior: contain; }
+.lenis.lenis-stopped { overflow: hidden; }
