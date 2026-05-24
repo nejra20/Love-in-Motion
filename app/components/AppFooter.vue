@@ -1,86 +1,137 @@
 <template>
-  <footer class="section-dark" style="padding:48px 32px 56px;position:relative;overflow:hidden;text-align:center">
+  <footer class="section-dark footer-root" ref="el">
     <div class="texture-overlay" />
+    <div class="inner footer-inner">
 
-    <div class="relative z-10">
-      <!-- Gold ornament -->
-      <div style="display:flex;align-items:center;justify-content:center;gap:14px;margin-bottom:28px">
-        <div style="height:1px;width:48px;background:linear-gradient(to right,transparent,#c9a96e)" />
-        <Heart :size="14" fill="#c9a96e" style="color:#c9a96e;opacity:0.7" />
-        <div style="height:1px;width:48px;background:linear-gradient(to left,transparent,#c9a96e)" />
+      <!-- Top ornament -->
+      <div class="gold-divider">
+        <div class="gold-line" />
+        <Heart :size="14" fill="#c9a96e" style="color:#c9a96e;opacity:0.7;flex-shrink:0" />
+        <div class="gold-line" />
       </div>
 
-      <!-- Closing headline -->
-      <p class="serif-heading" style="font-size:1rem;color:rgba(245,240,232,0.5);letter-spacing:0.15em;text-transform:uppercase;margin-bottom:12px">
+      <p class="serif-heading" style="font-size:0.75rem;color:rgba(245,240,232,0.4);letter-spacing:0.2em;text-transform:uppercase;margin-bottom:28px">
         Terima Kasih
       </p>
 
-      <!-- Couple illustration circle -->
-      <div class="footer-couple-wrap">
-        <img src="/images/couple.jpg" alt="Rizky & Anisa" class="footer-couple-img" @error="imgErr = true" />
-        <div v-if="imgErr" class="footer-couple-fallback" />
+      <!-- Couple photo -->
+      <div class="footer-photo-wrap">
+        <img src="/images/couple.jpg" alt="Rizky & Anisa" class="footer-photo" @error="imgErr = true" />
+        <div v-if="imgErr" class="footer-photo-fallback" />
       </div>
 
+      <!-- Names -->
+      <p class="sec-label" style="color:rgba(201,169,110,0.55);margin-bottom:6px">KAMI YANG BERBAHAGIA</p>
+      <h2 class="script-heading" style="font-size:clamp(2rem,5vw,3rem);color:#f5f0e8;margin-bottom:20px">Rizky &amp; Anisa</h2>
+
       <!-- Closing text -->
-      <p style="font-family:'Poppins',sans-serif;font-size:11px;line-height:1.9;color:rgba(245,240,232,0.55);max-width:300px;margin:0 auto 24px">
+      <p class="closing-text">
         Merupakan suatu kebahagiaan dan kehormatan bagi kami, apabila Bapak/Ibu/Saudara/i berkenan hadir dan memberikan do'a restu kepada kami.
       </p>
 
-      <p class="sec-label" style="color:rgba(201,169,110,0.5);margin-bottom:8px">KAMI YANG BERBAHAGIA</p>
-      <h2 class="serif-heading" style="font-size:1.8rem;color:#f5f0e8">Rizky &amp; Anisa</h2>
+      <div class="divider-h" style="opacity:0.12;margin:28px auto;max-width:240px" />
 
-      <div class="divider-h" style="opacity:0.15;margin:28px 0 20px" />
-
-      <!-- Social icons -->
-      <div style="display:flex;justify-content:center;gap:16px;margin-bottom:24px">
-        <a href="#" class="social-btn" aria-label="Instagram">
-          <Instagram :size="18" />
-        </a>
-        <a href="#" class="social-btn" aria-label="WhatsApp">
-          <MessageCircle :size="18" />
-        </a>
+      <!-- Social -->
+      <div class="social-row">
+        <a href="#" class="social-btn" aria-label="Instagram"><Instagram :size="16" /></a>
+        <a href="#" class="social-btn" aria-label="WhatsApp"><MessageCircle :size="16" /></a>
       </div>
 
-      <p style="font-family:'Poppins',sans-serif;font-size:9px;letter-spacing:0.15em;text-transform:uppercase;color:rgba(245,240,232,0.2)">
-        Made with love · Love in Motion
-      </p>
+      <p class="made-with">Made with love · Love in Motion</p>
     </div>
   </footer>
 </template>
 
 <script setup lang="ts">
 import { Heart, Instagram, MessageCircle } from 'lucide-vue-next'
+import { gsap } from 'gsap'
+import { ScrollTrigger } from 'gsap/ScrollTrigger'
+
+const el     = ref<HTMLElement>()
 const imgErr = ref(false)
+
+onMounted(() => {
+  gsap.registerPlugin(ScrollTrigger)
+  gsap.from(el.value, { opacity: 0, y: 30, duration: 0.9, ease: 'power2.out', scrollTrigger: { trigger: el.value, start: 'top 88%' } })
+})
 </script>
 
 <style scoped>
+.footer-root {
+  position: relative;
+  overflow: hidden;
+  text-align: center;
+  padding: 72px 0 64px;
+}
+
+.footer-inner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
 .texture-overlay {
   position: absolute;
   inset: 0;
-  background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.012'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+  background-image: url("data:image/svg+xml,%3Csvg width='80' height='80' viewBox='0 0 80 80' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%23c9a96e' fill-opacity='0.025'%3E%3Cpath d='M40 0L43 13H57L46 21L49 34L40 26L31 34L34 21L23 13H37L40 0Z'/%3E%3C/g%3E%3C/svg%3E");
   pointer-events: none;
 }
-.footer-couple-wrap {
+
+.gold-divider {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-bottom: 24px;
+  width: 100%;
+  max-width: 280px;
+}
+.gold-line {
+  flex: 1;
+  height: 1px;
+  background: linear-gradient(to right, transparent, rgba(201,169,110,0.5), transparent);
+}
+
+.footer-photo-wrap {
   width: 140px;
   height: 140px;
   border-radius: 50%;
   overflow: hidden;
   margin: 0 auto 24px;
   border: 2px solid rgba(201,169,110,0.3);
-  box-shadow: 0 8px 40px rgba(0,0,0,0.4);
+  box-shadow: 0 8px 40px rgba(0,0,0,0.5);
 }
-.footer-couple-img {
+@media (min-width: 640px) {
+  .footer-photo-wrap { width: 160px; height: 160px; }
+}
+.footer-photo {
   width: 100%;
   height: 100%;
   object-fit: cover;
   object-position: center top;
   display: block;
 }
-.footer-couple-fallback {
+.footer-photo-fallback {
   width: 100%;
   height: 100%;
   background: linear-gradient(135deg, #5a1a1a 0%, #3d1010 100%);
 }
+
+.closing-text {
+  font-family: 'Poppins', sans-serif;
+  font-size: 0.75rem;
+  line-height: 1.9;
+  color: rgba(245,240,232,0.5);
+  max-width: 420px;
+  margin: 0 auto;
+}
+
+.social-row {
+  display: flex;
+  justify-content: center;
+  gap: 14px;
+  margin-bottom: 28px;
+}
+
 .social-btn {
   display: flex;
   align-items: center;
@@ -88,13 +139,22 @@ const imgErr = ref(false)
   width: 40px;
   height: 40px;
   border-radius: 50%;
-  border: 1px solid rgba(245,240,232,0.2);
-  color: rgba(245,240,232,0.5);
+  border: 1px solid rgba(245,240,232,0.18);
+  color: rgba(245,240,232,0.45);
   transition: all 0.25s;
+  text-decoration: none;
 }
 .social-btn:hover {
-  background: rgba(255,255,255,0.08);
+  background: rgba(255,255,255,0.07);
   color: rgba(245,240,232,0.85);
-  border-color: rgba(245,240,232,0.4);
+  border-color: rgba(245,240,232,0.35);
+}
+
+.made-with {
+  font-family: 'Poppins', sans-serif;
+  font-size: 9px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: rgba(245,240,232,0.18);
 }
 </style>

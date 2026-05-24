@@ -1,31 +1,47 @@
 <template>
-  <div class="cover-wrap" :class="{ 'is-opening': opening }">
-    <!-- Background texture -->
+  <div class="cover" :class="{ opening }">
+    <!-- Full bg -->
     <div class="cover-bg" />
 
-    <!-- Couple illustration -->
-    <div class="couple-art">
-      <img src="/images/couple.jpg" alt="Couple" class="couple-img" @error="imgErr = true" />
-      <div v-if="imgErr" class="couple-placeholder" />
-      <!-- Vignette bottom -->
-      <div class="vignette-bottom" />
-    </div>
+    <!-- Desktop: side by side | Mobile: stacked -->
+    <div class="cover-layout">
+      <!-- Image side -->
+      <div class="cover-img-side">
+        <img src="/images/couple.jpg" alt="Couple" class="cover-img" @error="imgErr = true" />
+        <div v-if="imgErr" class="cover-img-fallback" />
+        <div class="cover-img-overlay" />
+      </div>
 
-    <!-- Bottom content -->
-    <div class="cover-footer">
-      <p class="sec-label" style="color:rgba(245,240,232,0.55);margin-bottom:6px">THE WEDDING OF</p>
-      <h1 class="serif-heading" style="font-size:2rem;color:#f5f0e8;margin-bottom:2px">Rizky &amp; Anisa</h1>
-      <p class="sec-label" style="color:rgba(245,240,232,0.4);letter-spacing:0.15em;margin-bottom:6px;font-size:10px">14 · 02 · 2026</p>
+      <!-- Content side -->
+      <div class="cover-content">
+        <!-- Gold ornament top -->
+        <div class="ornament" style="margin-bottom:28px">
+          <svg width="12" height="12" viewBox="0 0 12 12" fill="#c9a96e" opacity="0.7">
+            <path d="M6 0L7.2 4.4H12L8.4 7.1L9.6 11.6L6 8.9L2.4 11.6L3.6 7.1L0 4.4H4.8L6 0Z"/>
+          </svg>
+        </div>
 
-      <div class="divider-h" style="opacity:0.2;margin:14px 0" />
+        <p class="sec-label" style="color:rgba(201,169,110,0.65);margin-bottom:10px">THE WEDDING OF</p>
+        <h1 class="serif-heading cover-names">Rizky &amp; Anisa</h1>
+        <p class="cover-date sec-label">14 · 02 · 2026</p>
 
-      <p class="guest-label">Kepada Yth.</p>
-      <p class="guest-name">{{ guestName }}</p>
+        <div class="divider-h" style="opacity:0.18;margin:24px 0" />
 
-      <button class="btn-pill open-btn" @click="handleOpen">
-        <MailOpen :size="14" />
-        Buka Undangan
-      </button>
+        <p class="sec-label" style="color:rgba(245,240,232,0.4);margin-bottom:4px">Kepada Yth.</p>
+        <p class="cover-guest serif-heading">{{ guestName }}</p>
+
+        <button class="btn-pill cover-btn" @click="handleOpen">
+          <MailOpen :size="14" />
+          Buka Undangan
+        </button>
+
+        <!-- Decorative bottom -->
+        <div class="ornament" style="margin-top:32px">
+          <svg width="12" height="12" viewBox="0 0 12 12" fill="#c9a96e" opacity="0.4">
+            <path d="M6 0L7.2 4.4H12L8.4 7.1L9.6 11.6L6 8.9L2.4 11.6L3.6 7.1L0 4.4H4.8L6 0Z"/>
+          </svg>
+        </div>
+      </div>
     </div>
   </div>
 </template>
@@ -33,107 +49,121 @@
 <script setup lang="ts">
 import { MailOpen } from 'lucide-vue-next'
 
-const emit = defineEmits<{ open: [] }>()
+const emit   = defineEmits<{ open: [] }>()
 const opening = ref(false)
 const imgErr  = ref(false)
 
 const guestName = computed(() => {
   if (typeof window === 'undefined') return 'Tamu Undangan'
-  const params = new URLSearchParams(window.location.search)
-  return params.get('to') || 'Tamu Undangan'
+  return new URLSearchParams(window.location.search).get('to') || 'Tamu Undangan'
 })
 
 function handleOpen() {
   opening.value = true
-  // Brief delay so the CSS opening class shows before unmount
   setTimeout(() => emit('open'), 650)
 }
 </script>
 
 <style scoped>
-.cover-wrap {
+.cover {
   position: fixed;
   inset: 0;
   z-index: 100;
-  max-width: 440px;
-  left: 50%;
-  transform: translateX(-50%);
-  display: flex;
-  flex-direction: column;
-  overflow: hidden;
-  box-shadow: -1px 0 0 rgba(196,120,100,0.25), 1px 0 0 rgba(196,120,100,0.25);
+  transition: opacity 0.65s ease, transform 0.65s ease;
 }
+.cover.opening { opacity: 0; transform: scale(1.03); }
+
 .cover-bg {
   position: absolute;
   inset: 0;
-  background: linear-gradient(160deg, #2a080a 0%, #3d1010 50%, #1a0507 100%);
+  background: linear-gradient(135deg, #1a0507 0%, #3d1010 60%, #2a080a 100%);
 }
-/* Subtle texture overlay */
 .cover-bg::after {
   content: '';
   position: absolute;
   inset: 0;
-  background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.015'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+  background-image: url("data:image/svg+xml,%3Csvg width='80' height='80' viewBox='0 0 80 80' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%23c9a96e' fill-opacity='0.03'%3E%3Cpath d='M40 0L43 13H57L46 21L49 34L40 26L31 34L34 21L23 13H37L40 0Z'/%3E%3C/g%3E%3C/svg%3E");
 }
 
-.couple-art {
-  flex: 1;
+/* Layout */
+.cover-layout {
   position: relative;
-  overflow: hidden;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
 }
-.couple-img {
+@media (min-width: 768px) {
+  .cover-layout { flex-direction: row; }
+}
+
+/* Image side */
+.cover-img-side {
+  position: relative;
+  flex: 1;
+  overflow: hidden;
+  min-height: 45vh;
+}
+@media (min-width: 768px) {
+  .cover-img-side { min-height: 100vh; flex: 0 0 55%; }
+}
+.cover-img {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  object-position: center top;
+  object-position: center 15%;
   display: block;
 }
-.couple-placeholder {
+.cover-img-fallback {
   width: 100%;
   height: 100%;
-  background: linear-gradient(180deg, rgba(90,26,26,0.3) 0%, transparent 100%);
+  background: linear-gradient(160deg, #5a1a1a 0%, #2a080a 100%);
 }
-.vignette-bottom {
+.cover-img-overlay {
   position: absolute;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  height: 220px;
-  background: linear-gradient(to top, #1a0507 0%, transparent 100%);
+  inset: 0;
+  background: linear-gradient(to bottom, transparent 40%, rgba(26,5,7,0.85) 100%);
+}
+@media (min-width: 768px) {
+  .cover-img-overlay {
+    background: linear-gradient(to right, transparent 50%, rgba(26,5,7,0.9) 100%);
+  }
 }
 
-.cover-footer {
-  position: relative;
-  z-index: 2;
+/* Content side */
+.cover-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
   text-align: center;
-  padding: 20px 28px 40px;
-  background: linear-gradient(to bottom, #1a0507 0%, #2a080a 100%);
+  padding: 32px 36px 48px;
+  flex: 0 0 auto;
+}
+@media (min-width: 768px) {
+  .cover-content {
+    flex: 0 0 45%;
+    padding: 60px 56px;
+    min-height: 100vh;
+  }
 }
 
-.guest-label {
-  font-family: 'Poppins', sans-serif;
-  font-size: 11px;
-  color: rgba(245,240,232,0.45);
-  letter-spacing: 0.1em;
-  margin-bottom: 2px;
+.cover-names {
+  font-size: clamp(2rem, 5vw, 3.2rem);
+  color: #f5f0e8;
+  margin-bottom: 6px;
+  letter-spacing: 0.02em;
 }
-.guest-name {
-  font-family: 'Cormorant Garamond', serif;
-  font-size: 1.25rem;
-  color: rgba(245,240,232,0.75);
-  margin-bottom: 20px;
+.cover-date {
+  color: rgba(201,169,110,0.55);
+  letter-spacing: 0.25em;
+  font-size: 11px;
+}
+.cover-guest {
+  font-size: clamp(1rem, 2.5vw, 1.4rem);
+  color: rgba(245,240,232,0.7);
+  margin-bottom: 28px;
   font-style: italic;
 }
-
-.open-btn {
-  margin-top: 4px;
-}
-
-.cover-wrap {
-  transition: opacity 0.65s ease, transform 0.65s ease;
-}
-.cover-wrap.is-opening {
-  opacity: 0;
-  transform: translateX(-50%) scale(1.04);
-}
+.cover-btn { margin-top: 4px; }
 </style>

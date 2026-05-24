@@ -1,33 +1,39 @@
 <template>
-  <section class="section-dark relative overflow-hidden" style="padding-bottom:60px">
-    <!-- Texture overlay -->
-    <div class="texture-overlay" />
+  <section class="hero section-dark">
+    <!-- Full-width hero image with overlay -->
+    <div class="hero-banner" ref="bannerEl">
+      <img src="/images/couple.jpg" alt="Rizky & Anisa" class="hero-banner-img" @error="imgErr = true" />
+      <div v-if="imgErr" class="hero-banner-fallback" />
+      <div class="hero-banner-overlay" />
 
-    <!-- Couple illustration top -->
-    <div class="hero-img-wrap">
-      <img src="/images/couple.jpg" alt="Rizky & Anisa" class="hero-img" @error="imgErr = true" />
-      <div v-if="imgErr" class="hero-img-fallback" />
-      <div class="hero-img-vignette" />
+      <!-- Text overlay on image for mobile -->
+      <div class="hero-banner-text">
+        <p class="sec-label" style="color:rgba(201,169,110,0.8);margin-bottom:8px">THE WEDDING OF</p>
+        <div class="monogram">
+          <span>R</span>
+          <span class="sep">|</span>
+          <span>A</span>
+        </div>
+        <p class="serif-heading hero-names">Rizky &amp; Anisa</p>
+        <p class="sec-label" style="color:rgba(201,169,110,0.6);letter-spacing:0.25em;margin-top:6px">14 · 02 · 2026</p>
+      </div>
     </div>
 
-    <!-- Monogram + Names -->
-    <div class="hero-content">
-      <p class="sec-label" style="color:rgba(201,169,110,0.7);margin-bottom:12px">THE WEDDING OF</p>
+    <!-- Countdown row -->
+    <div class="hero-countdown" ref="countEl">
+      <div class="inner" style="padding-top:48px;padding-bottom:56px">
+        <!-- Ornament -->
+        <div class="ornament" style="margin-bottom:32px">
+          <svg width="10" height="10" viewBox="0 0 12 12" fill="#c9a96e" opacity="0.6">
+            <path d="M6 0L7.2 4.4H12L8.4 7.1L9.6 11.6L6 8.9L2.4 11.6L3.6 7.1L0 4.4H4.8L6 0Z"/>
+          </svg>
+        </div>
 
-      <div class="monogram">
-        <span>R</span>
-        <span class="sep">|</span>
-        <span>A</span>
-      </div>
-
-      <p class="serif-heading" style="font-size:1.9rem;color:#f5f0e8;margin:8px 0 4px">Rizky &amp; Anisa</p>
-      <p class="sec-label" style="color:rgba(201,169,110,0.5);letter-spacing:0.2em;font-size:10px">14 · 02 · 2026</p>
-
-      <!-- Countdown -->
-      <div class="countdown-row">
-        <div v-for="unit in countdown" :key="unit.label" class="cd-box">
-          <p class="cd-num serif-heading">{{ unit.value }}</p>
-          <p class="cd-label">{{ unit.label }}</p>
+        <div class="cd-row">
+          <div v-for="unit in countdown" :key="unit.label" class="cd-box">
+            <p class="cd-num serif-heading">{{ unit.value }}</p>
+            <p class="cd-label sec-label">{{ unit.label }}</p>
+          </div>
         </div>
       </div>
     </div>
@@ -35,14 +41,19 @@
 </template>
 
 <script setup lang="ts">
-const imgErr = ref(false)
+import { gsap } from 'gsap'
+import { ScrollTrigger } from 'gsap/ScrollTrigger'
+
+const imgErr   = ref(false)
+const bannerEl = ref<HTMLElement>()
+const countEl  = ref<HTMLElement>()
 
 const WEDDING = new Date('2026-02-14T08:00:00')
 const countdown = ref([
   { label: 'Hari',  value: '000' },
-  { label: 'Jam',   value: '00'  },
-  { label: 'Menit', value: '00'  },
-  { label: 'Detik', value: '00'  },
+  { label: 'Jam',   value: '00' },
+  { label: 'Menit', value: '00' },
+  { label: 'Detik', value: '00' },
 ])
 
 function tick() {
@@ -60,84 +71,111 @@ function tick() {
 }
 
 let timer: ReturnType<typeof setInterval>
-onMounted(() => { tick(); timer = setInterval(tick, 1000) })
+onMounted(() => {
+  gsap.registerPlugin(ScrollTrigger)
+  tick()
+  timer = setInterval(tick, 1000)
+
+  gsap.from(bannerEl.value?.querySelector('.hero-banner-text'), {
+    opacity: 0, y: 40, duration: 1.2, ease: 'power2.out', delay: 0.2
+  })
+  gsap.from(countEl.value?.querySelectorAll('.cd-box') ?? [], {
+    opacity: 0, y: 30, scale: 0.9, stagger: 0.1, duration: 0.8, ease: 'back.out(1.5)',
+    scrollTrigger: { trigger: countEl.value, start: 'top 85%' }
+  })
+})
 onUnmounted(() => clearInterval(timer))
 </script>
 
 <style scoped>
-.texture-overlay {
-  position: absolute;
-  inset: 0;
-  background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.012'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
-  pointer-events: none;
-  z-index: 0;
-}
-.hero-img-wrap {
+.hero { overflow: hidden; }
+
+/* Banner */
+.hero-banner {
   position: relative;
-  height: 360px;
+  height: 70vh;
+  min-height: 400px;
+  max-height: 700px;
   overflow: hidden;
 }
-.hero-img {
+@media (min-width: 768px) {
+  .hero-banner { height: 85vh; max-height: 900px; }
+}
+.hero-banner-img {
   width: 100%;
   height: 100%;
   object-fit: cover;
   object-position: center 20%;
   display: block;
 }
-.hero-img-fallback {
+.hero-banner-fallback {
   width: 100%;
   height: 100%;
-  background: linear-gradient(180deg, rgba(90,26,26,0.5) 0%, rgba(26,5,7,0.8) 100%);
+  background: linear-gradient(160deg, #5a1a1a 0%, #2a080a 100%);
 }
-.hero-img-vignette {
+.hero-banner-overlay {
   position: absolute;
   inset: 0;
-  background: linear-gradient(to bottom, transparent 30%, #2a080a 100%);
+  background: linear-gradient(to bottom, rgba(26,5,7,0.2) 0%, rgba(26,5,7,0.75) 100%);
 }
 
-.hero-content {
-  position: relative;
-  z-index: 1;
+.hero-banner-text {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
   text-align: center;
-  padding: 0 24px 24px;
-  margin-top: -40px;
+  padding: 40px 24px 48px;
+}
+@media (min-width: 768px) {
+  .hero-banner-text { padding: 60px 48px 72px; }
 }
 
 .monogram {
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 16px;
+  gap: 20px;
   font-family: 'Cormorant Garamond', serif;
-  font-size: 3rem;
+  font-size: clamp(2.8rem, 8vw, 6rem);
   font-weight: 400;
   color: #f5f0e8;
-  letter-spacing: 0.05em;
 }
 .monogram .sep {
   color: #c9a96e;
-  font-size: 1.5rem;
-  margin-bottom: 6px;
+  font-size: 0.5em;
+  margin-bottom: 8px;
+  opacity: 0.8;
+}
+.hero-names {
+  font-size: clamp(1.2rem, 3vw, 1.8rem);
+  color: rgba(245,240,232,0.85);
+  margin: 4px 0 0;
+  letter-spacing: 0.06em;
 }
 
-.countdown-row {
+/* Countdown */
+.hero-countdown {
+  background: linear-gradient(to bottom, #2a080a, #3d1010);
+}
+.cd-row {
   display: flex;
   justify-content: center;
-  gap: 10px;
-  margin-top: 24px;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+@media (min-width: 768px) {
+  .cd-row { gap: 20px; }
 }
 .cd-num {
-  font-size: 1.6rem;
+  font-size: clamp(1.4rem, 4vw, 2.4rem);
   color: #3d1010;
   margin: 0;
   line-height: 1;
 }
 .cd-label {
-  font-family: 'Poppins', sans-serif;
+  color: rgba(61,16,16,0.45);
+  margin-top: 5px;
   font-size: 9px;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  color: rgba(61,16,16,0.5);
-  margin-top: 4px;
 }
 </style>

@@ -32,15 +32,9 @@ onUnmounted(() => audio.value?.pause())
 <style scoped>
 .music-player {
   position: fixed;
-  bottom: 24px;
-  right: 24px;
+  bottom: 28px;
+  right: 28px;
   z-index: 200;
-  /* Offset to match the max-width wrapper on desktop */
-}
-@media (min-width: 460px) {
-  .music-player {
-    right: calc(50% - 220px + 8px);
-  }
 }
 
 .music-btn {
