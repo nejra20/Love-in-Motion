@@ -1,8 +1,17 @@
+<div align="center">
+
 # Love in Motion
 
 A digital wedding invitation built with Nuxt 4 and Vue 3. Features a full-page cover animation, scroll-triggered GSAP animations, countdown timer, RSVP form via EmailJS, and a responsive layout that works on both desktop and mobile.
 
-Live demo: [sha-wrks.github.io/Love-in-Motion](https://sha-wrks.github.io/Love-in-Motion/)
+[![CI / Deploy](https://github.com/sha-wrks/Love-in-Motion/actions/workflows/ci.yml/badge.svg)](https://github.com/sha-wrks/Love-in-Motion/actions/workflows/ci.yml)
+[![Nuxt](https://img.shields.io/badge/Nuxt-4-00DC82?logo=nuxt.js&logoColor=white)](https://nuxt.com/)
+[![Vue](https://img.shields.io/badge/Vue-3-4FC08D?logo=vue.js&logoColor=white)](https://vuejs.org/)
+[![Deployed on GitHub Pages](https://img.shields.io/badge/Deployed%20on-GitHub%20Pages-0f172a?logo=github)](https://sha-wrks.github.io/Love-in-Motion/)
+
+[Live Demo](https://sha-wrks.github.io/Love-in-Motion/)
+
+</div>
 
 ---
 
