@@ -14,20 +14,14 @@
           <span class="sep">|</span>
           <span>N</span>
         </div>
-        <p class="serif-heading hero-names">Riada &amp; Nejre</p>
+        <p class="serif-heading hero-names" style="color:#f5f0e8">Riada &amp; Nejre</p>
         <p class="sec-label" style="color:#D49128;letter-spacing:0.25em;margin-top:6px">17 · 10 · 2026</p>
       </div>
     </div>
 
     <!-- Countdown row -->
     <div class="hero-countdown" ref="countEl">
-      <div class="inner" style="padding-top:48px;padding-bottom:56px">
-        <!-- Ornament -->
-        <div class="ornament" style="margin-bottom:32px">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#f5e6c8" stroke-width="1.5" opacity="0.8">
-            <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
-          </svg>
-        </div>
+      <div class="inner" style="padding-top:80px;padding-bottom:80px">
 
         <div class="cd-row">
           <div v-for="unit in countdown" :key="unit.label" class="cd-box">
@@ -36,6 +30,7 @@
           </div>
         </div>
       </div>
+
     </div>
   </section>
 </template>
@@ -63,7 +58,7 @@ function tick() {
   const m = Math.max(0, Math.floor((diff % 3600000) / 60000))
   const s = Math.max(0, Math.floor((diff % 60000) / 1000))
   countdown.value = [
-    { label: 'Dani',  value: String(d).padStart(3, '0') },
+    { label: 'Dani',  value: String(d).padStart(2, '0') },
     { label: 'Sati',   value: String(h).padStart(2, '0') },
     { label: 'Minute', value: String(m).padStart(2, '0') },
     { label: 'Sekunde', value: String(s).padStart(2, '0') },
@@ -116,7 +111,7 @@ onUnmounted(() => clearInterval(timer))
 .hero-banner-overlay {
   position: absolute;
   inset: 0;
-  background: linear-gradient(to bottom, rgba(26,5,7,0.2) 0%, rgba(26,5,7,0.75) 100%);
+  background: linear-gradient(to bottom, rgba(26,5,7,0.2) 0%, rgba(26,5,7,0.5) 100%);
 }
 
 .hero-banner-text {
@@ -149,14 +144,17 @@ onUnmounted(() => clearInterval(timer))
 }
 .hero-names {
   font-size: clamp(1.2rem, 3vw, 1.8rem);
-  color: rgba(245,240,232,0.85);
+  color:#0f2b1a;
   margin: 4px 0 0;
   letter-spacing: 0.06em;
 }
 
 /* Countdown */
 .hero-countdown {
-  background: linear-gradient(to bottom, #2a080a, #3d1010);
+  background: #f5f0e8;
+}
+.cd-box{
+  background-color: #1c4329;
 }
 .cd-row {
   display: flex;
@@ -169,13 +167,20 @@ onUnmounted(() => clearInterval(timer))
 }
 .cd-num {
   font-size: clamp(1.4rem, 4vw, 2.4rem);
-  color: #3d1010;
+  color: #f5f0e8;
   margin: 0;
   line-height: 1;
 }
 .cd-label {
-  color: rgba(61,16,16,0.45);
+  color: #f5f0e8;
   margin-top: 5px;
   font-size: 9px;
 }
+.ornament::before, .ornament::after {
+  background: linear-gradient(to right, transparent, #D49128);
+}
+.ornament::after {
+  background: linear-gradient(to left, transparent, #D49128);
+}
+
 </style>

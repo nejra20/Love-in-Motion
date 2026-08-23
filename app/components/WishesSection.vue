@@ -1,89 +1,114 @@
 <template>
-  <section class="section-cream" style="padding:80px 0">
-    <div class="inner" ref="el">
-      <div style="text-align:center;margin-bottom:48px">
-        <h2 class="script-heading" style="font-size:clamp(2.4rem,5vw,3.6rem);color:#3d1010;margin-bottom:8px">Ucapkan Sesuatu</h2>
-        <p style="font-family:'Poppins',sans-serif;font-size:12px;color:rgba(61,16,16,0.5)">Berikan Ucapan &amp; Doa Restu</p>
-      </div>
+  <section class="rsvp-section">
+    <div class="section-glow"></div>
+    <div class="grain"></div>
 
-      <!-- Stats row -->
+    <div ref="el" class="rsvp-inner">
+
+      <!-- HEADER -->
+      <header class="section-header">
+        <p class="eyebrow">Vaše prisustvo</p>
+
+        <div class="heading-row">
+          <span class="heading-line"></span>
+          <span class="heading-symbol">✦</span>
+          <span class="heading-line"></span>
+        </div>
+
+        <h2 class="section-title">
+          Potvrdite dolazak
+        </h2>
+
+      </header>
+
+      <!-- STATS ROW (Zelena kutija na bijeloj) -->
       <div class="stats-row">
         <div class="stat-box attending">
-          <p class="serif-heading stat-num">{{ store.attendingCount }}</p>
-          <p class="stat-label">Hadir</p>
+          <p class="stat-num">{{ store.attendingCount }}</p>
+          <p class="stat-label">Dolazim</p>
         </div>
-        <div style="width:1px;background:rgba(61,16,16,0.1);align-self:stretch" />
+
+        <div class="stats-divider"></div>
+
         <div class="stat-box declined">
-          <p class="serif-heading stat-num">{{ store.declinedCount }}</p>
-          <p class="stat-label">Tidak Hadir</p>
+          <p class="stat-num">{{ store.declinedCount }}</p>
+          <p class="stat-label">Ne mogu doći</p>
         </div>
       </div>
 
-      <!-- Form or success -->
+      <!-- FORM OR SUCCESS (Tamno zelena kutija) -->
       <div class="form-wrap">
         <Transition name="fade-pop">
           <div v-if="store.submitSuccess" class="success-box">
-            <CheckCircle2 :size="32" style="color:#4ade80;margin-bottom:12px" />
-            <p class="serif-heading" style="font-size:1.3rem;color:#3d1010;margin-bottom:6px">Terima Kasih!</p>
-            <p style="font-size:12px;color:rgba(61,16,16,0.55);font-family:'Poppins',sans-serif">Ucapan dan konfirmasi kehadiranmu telah kami terima.</p>
-            <button class="btn-pill-dark" style="margin-top:20px" @click="store.clearForm()">Kirim Lagi</button>
+            <CheckCircle2 :size="36" style="color:#D49128;margin-bottom:16px" />
+            <p class="script-heading" style="font-size:2rem;color:#f5f0e8;margin-bottom:8px">Hvala Vam!</p>
+            <p style="font-size:13px;color:rgba(245,240,232,0.6);font-family:'Montserrat',sans-serif;line-height:1.7;max-width:300px">
+              Vaš odgovor i lijepe želje su uspješno zabilježeni. Radujemo se što ćemo vas ugostiti!
+            </p>
+            <button class="map-button" style="margin-top:28px" @click="store.clearForm()">
+              Pošalji ponovo
+              <span class="arrow">↗</span>
+            </button>
           </div>
         </Transition>
 
         <form v-if="!store.submitSuccess" @submit.prevent="submit">
+
           <div class="form-grid">
             <div>
-              <label class="field-label">Nama Lengkap *</label>
-              <input type="text" class="input-cream" placeholder="Nama Anda" required
-                :value="store.form.fullName"
-                @input="store.updateField('fullName', ($event.target as HTMLInputElement).value)" />
+              <label class="field-label">Ime i prezime *</label>
+              <input type="text" class="input-dark" placeholder="Vaše ime" required
+                     :value="store.form.fullName"
+                     @input="store.updateField('fullName', ($event.target as HTMLInputElement).value)" />
             </div>
             <div>
               <label class="field-label">Email</label>
-              <input type="email" class="input-cream" placeholder="email@contoh.com"
-                :value="store.form.email"
-                @input="store.updateField('email', ($event.target as HTMLInputElement).value)" />
+              <input type="email" class="input-dark" placeholder="email@primjer.com"
+                     :value="store.form.email"
+                     @input="store.updateField('email', ($event.target as HTMLInputElement).value)" />
             </div>
           </div>
 
           <div style="margin-top:14px">
-            <label class="field-label">Ucapan &amp; Doa</label>
-            <textarea class="input-cream" placeholder="Tuliskan ucapan dan doa terbaikmu..." rows="4" style="resize:none"
-              :value="store.form.songRequest"
-              @input="store.updateField('songRequest', ($event.target as HTMLTextAreaElement).value)" />
+            <label class="field-label">Poruka i želje</label>
+            <textarea class="input-dark" placeholder="Napišite vaše želje mladencima..." rows="4" style="resize:none"
+                      :value="store.form.songRequest"
+                      @input="store.updateField('songRequest', ($event.target as HTMLTextAreaElement).value)" />
           </div>
 
           <div style="margin-top:14px">
-            <label class="field-label">Konfirmasi Kehadiran *</label>
-            <select class="input-cream"
-              :value="store.form.rsvpStatus"
-              @change="store.updateField('rsvpStatus', ($event.target as HTMLSelectElement).value as any)">
-              <option value="pending" disabled>Pilih kehadiran...</option>
-              <option value="attending">Hadir</option>
-              <option value="declined">Tidak Hadir</option>
+            <label class="field-label">Potvrda dolaska *</label>
+            <select class="input-dark"
+                    :value="store.form.rsvpStatus"
+                    @change="store.updateField('rsvpStatus', ($event.target as HTMLSelectElement).value as any)">
+              <option value="pending" disabled>Odaberite opciju...</option>
+              <option value="attending">Dolazim sa zadovoljstvom</option>
+              <option value="declined">Nažalost, ne mogu doći</option>
             </select>
           </div>
 
-          <p v-if="store.submitError" style="margin-top:10px;font-size:12px;color:#e53e3e;font-family:'Poppins',sans-serif">
+          <p v-if="store.submitError" style="margin-top:12px;font-size:12px;color:#fca5a5;font-family:'Montserrat',sans-serif;text-align:center">
             {{ store.submitError }}
           </p>
 
-          <button type="submit" class="submit-btn" :disabled="store.isSubmitting || store.form.rsvpStatus === 'pending'" style="margin-top:20px">
-            <Loader2 v-if="store.isSubmitting" :size="14" class="animate-spin" />
-            <Send v-else :size="14" />
-            {{ store.isSubmitting ? 'Mengirim...' : 'Kirim Ucapan' }}
+          <button type="submit" class="map-button submit-btn" :disabled="store.isSubmitting || store.form.rsvpStatus === 'pending'" style="margin-top:28px;width:100%">
+            <Loader2 v-if="store.isSubmitting" :size="13" class="animate-spin" />
+            <Send v-else :size="13" />
+            {{ store.isSubmitting ? 'Slanje...' : 'Pošalji potvrdu' }}
           </button>
 
-          <p v-if="store.form.rsvpStatus === 'pending'" style="text-align:center;margin-top:8px;font-size:11px;color:rgba(61,16,16,0.4);font-family:'Poppins',sans-serif">
-            Pilih konfirmasi kehadiran terlebih dahulu
+          <p v-if="store.form.rsvpStatus === 'pending'" style="text-align:center;margin-top:10px;font-size:10px;color:rgba(245,240,232,0.4);font-family:'Montserrat',sans-serif">
+            Molimo odaberite opciju dolaska prije slanja
           </p>
         </form>
       </div>
+
     </div>
   </section>
 </template>
 
 <script setup lang="ts">
+import { ref, onMounted, onUnmounted } from 'vue'
 import { CheckCircle2, Send, Loader2 } from 'lucide-vue-next'
 import { gsap } from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
@@ -91,7 +116,7 @@ import { useGuestStore } from '~/stores/guestStore'
 import { initEmailJS, sendRSVP } from '~/utils/emailjs-config'
 
 const store = useGuestStore()
-const el    = ref<HTMLElement>()
+const el    = ref<HTMLElement | null>(null)
 
 async function submit() {
   if (store.form.rsvpStatus === 'pending') return
@@ -102,7 +127,7 @@ async function submit() {
     store.submitSuccess = true
     store.clearForm()
   } catch {
-    store.submitError = 'Gagal mengirim. Periksa koneksi internet dan coba lagi.'
+    store.submitError = 'Slanje nije uspjelo. Provjerite internet vezu i pokušajte ponovo.'
   } finally {
     store.isSubmitting = false
   }
@@ -112,50 +137,198 @@ onMounted(() => {
   gsap.registerPlugin(ScrollTrigger)
   store.hydrate()
   initEmailJS()
-  gsap.from(el.value, { opacity: 0, y: 30, duration: 0.9, ease: 'power2.out', scrollTrigger: { trigger: el.value, start: 'top 85%' } })
+
+  if (!el.value) return
+
+  const ctx = gsap.context(() => {
+    gsap.from(el.value, {
+      opacity: 0,
+      y: 30,
+      duration: 1,
+      ease: 'power2.out',
+      scrollTrigger: {
+        trigger: el.value,
+        start: 'top 85%',
+        once: true,
+      },
+    })
+  }, el)
+
+  onUnmounted(() => {
+    ctx.revert()
+  })
 })
 </script>
 
 <style scoped>
+
+/* =========================================================
+   SECTION (BIJELA POZADINA)
+   ========================================================= */
+.rsvp-section {
+  position: relative;
+  overflow: hidden;
+  padding: 110px 24px;
+
+  /* Čista bijela pozadina */
+  background: #ffffff;
+
+  color: #14311f; /* Tamno zelena za tekst */
+}
+
+.rsvp-inner {
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  max-width: 680px;
+  margin: 0 auto;
+}
+
+/* =========================================================
+   BACKGROUND (Svijetli glow)
+   ========================================================= */
+.section-glow {
+  position: absolute;
+  top: -200px;
+  left: 50%;
+  width: 600px;
+  height: 600px;
+  transform: translateX(-50%);
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(20, 49, 31, 0.05) 0%, rgba(20, 49, 31, 0) 68%);
+  pointer-events: none;
+}
+
+.grain {
+  position: absolute;
+  inset: 0;
+  opacity: 0.015;
+  pointer-events: none;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.5'/%3E%3C/svg%3E");
+}
+
+/* =========================================================
+   HEADER (Zeleni naslov)
+   ========================================================= */
+.section-header {
+  margin-bottom: 54px;
+  text-align: center;
+}
+
+.eyebrow {
+  margin: 0 0 17px;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 9px;
+  font-weight: 500;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: #b35c3a; /* Ciglasta narandžasta */
+}
+
+.heading-row {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  margin-bottom: 14px;
+}
+
+.heading-line {
+  width: 55px;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(20, 49, 31, 0.4));
+}
+.heading-line:last-child {
+  background: linear-gradient(90deg, rgba(20, 49, 31, 0.4), transparent);
+}
+
+.heading-symbol {
+  font-family: serif;
+  font-size: 10px;
+  color: #b35c3a;
+}
+
+.section-title {
+  margin: 0;
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(3rem, 7vw, 4.4rem);
+  font-weight: 500;
+  line-height: 0.95;
+  letter-spacing: -0.025em;
+  color: #14311f; /* Tamno zelena */
+}
+
+.section-intro {
+  max-width: 390px;
+  margin: 20px auto 0;
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.15rem;
+  font-style: italic;
+  line-height: 1.45;
+  color: rgba(20, 49, 31, 0.55);
+}
+
+/* =========================================================
+   STATS (Bijela kutija na bijeloj pozadini sa zelenim okvirom)
+   ========================================================= */
 .stats-row {
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 0;
-  background: white;
-  border: 1px solid rgba(61,16,16,0.08);
-  border-radius: 16px;
-  overflow: hidden;
-  max-width: 320px;
+  max-width: 360px;
   margin: 0 auto 40px;
-  box-shadow: 0 2px 16px rgba(0,0,0,0.05);
-}
-.stat-box { flex: 1; padding: 20px 16px; text-align: center; }
-.stat-num {
-  font-size: 2rem;
-  color: #3d1010;
-  line-height: 1;
-  margin-bottom: 4px;
-}
-.stat-label {
-  font-family: 'Poppins', sans-serif;
-  font-size: 10px;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  color: rgba(61,16,16,0.5);
+  border: 1px solid rgba(20, 49, 31, 0.15);
+  border-radius: 2px;
+  background: #ffffff;
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.05);
 }
 
-.form-wrap {
-  max-width: 680px;
-  margin: 0 auto;
-  background: white;
-  border: 1px solid rgba(61,16,16,0.08);
-  border-radius: 24px;
-  padding: 36px 32px;
-  box-shadow: 0 8px 48px rgba(0,0,0,0.07);
+.stat-box {
+  flex: 1;
+  padding: 20px 16px;
+  text-align: center;
 }
+
+.stat-num {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 2.4rem;
+  line-height: 1;
+  margin-bottom: 5px;
+  color: #b35c3a; /* Ciglasta narandžasta */
+}
+
+.stat-label {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 9px;
+  font-weight: 500;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: rgba(20, 49, 31, 0.55);
+}
+
+.stats-divider {
+  width: 1px;
+  height: 50px;
+  background: rgba(20, 49, 31, 0.1);
+}
+
+/* =========================================================
+   FORM CARD (TAMNO ZELENA KUTIJA)
+   ========================================================= */
+.form-wrap {
+  border: 1px solid rgba(201, 169, 110, 0.22);
+  border-radius: 2px;
+
+  /* Tamno zelena pozadina unutar forme */
+  background: linear-gradient(180deg, #14311f 0%, #10291a 100%);
+
+  box-shadow: 0 25px 70px rgba(0, 0, 0, 0.15);
+  padding: 36px 32px;
+  color: #f5f0e8; /* Svijetli tekst unutar zelene kutije */
+}
+
 @media (max-width: 480px) {
-  .form-wrap { padding: 24px 20px; }
+  .form-wrap { padding: 26px 20px; }
 }
 
 .form-grid {
@@ -169,15 +342,71 @@ onMounted(() => {
 
 .field-label {
   display: block;
-  font-family: 'Poppins', sans-serif;
-  font-size: 10px;
-  font-weight: 600;
-  letter-spacing: 0.15em;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 9px;
+  font-weight: 500;
+  letter-spacing: 0.2em;
   text-transform: uppercase;
-  color: rgba(61,16,16,0.5);
-  margin-bottom: 7px;
+  color: rgba(201, 169, 110, 0.55); /* Zlatna unutar zelene */
+  margin-bottom: 8px;
 }
 
+/* Inputi (Tamno zeleni unutar zelene kutije) */
+.input-dark {
+  width: 100%;
+  background: rgba(16, 41, 26, 0.8);
+  border: 1px solid rgba(201, 169, 110, 0.15);
+  border-radius: 2px;
+  padding: 13px 16px;
+  color: #f5f0e8;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 13px;
+  transition: all 0.3s ease;
+}
+
+.input-dark:focus {
+  outline: none;
+  border-color: rgba(201, 169, 110, 0.5);
+  background: rgba(16, 41, 26, 1);
+  box-shadow: 0 0 0 3px rgba(201, 169, 110, 0.08);
+}
+
+.input-dark::placeholder { color: rgba(245, 240, 232, 0.25); }
+
+/* =========================================================
+   BUTTON (Isti stil kao map-button)
+   ========================================================= */
+.map-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 9px;
+  min-height: 40px;
+  padding: 0 17px;
+  border: 1px solid rgba(201, 169, 110, 0.3);
+  border-radius: 999px;
+  background: transparent;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 9px;
+  font-weight: 500;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: rgba(245, 240, 232, 0.75);
+  cursor: pointer;
+  transition: background 0.3s ease, border-color 0.3s ease, color 0.3s ease;
+}
+
+.map-button:hover:not(:disabled) {
+  background: rgba(201, 169, 110, 0.1);
+  border-color: rgba(201, 169, 110, 0.6);
+  color: #f5f0e8;
+}
+
+.map-button:disabled { opacity: 0.45; cursor: not-allowed; }
+
+/* =========================================================
+   SUCCESS BOX
+   ========================================================= */
 .success-box {
   display: flex;
   flex-direction: column;
@@ -186,29 +415,31 @@ onMounted(() => {
   padding: 24px 0;
 }
 
-.submit-btn {
-  width: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 8px;
-  padding: 15px;
-  background: linear-gradient(135deg, #2a080a, #5a1a1a);
-  color: #f5f0e8;
-  border: none;
-  border-radius: 12px;
-  font-family: 'Poppins', sans-serif;
-  font-size: 12px;
-  font-weight: 500;
-  letter-spacing: 0.15em;
-  text-transform: uppercase;
-  cursor: pointer;
-  transition: all 0.25s;
-  box-shadow: 0 4px 24px rgba(61,16,16,0.25);
-}
-.submit-btn:hover:not(:disabled) { background: linear-gradient(135deg, #3d1010, #7a2424); box-shadow: 0 8px 32px rgba(61,16,16,0.35); }
-.submit-btn:disabled { opacity: 0.45; cursor: not-allowed; }
-
+/* Animacije */
 .fade-pop-enter-active, .fade-pop-leave-active { transition: all 0.35s ease; }
 .fade-pop-enter-from, .fade-pop-leave-to { opacity: 0; transform: scale(0.97); }
+
+/* =========================================================
+   MOBILE
+   ========================================================= */
+@media (max-width: 600px) {
+  .rsvp-section { padding: 85px 18px; }
+  .section-header { margin-bottom: 44px; }
+  .heading-line { width: 40px; }
+  .section-title { font-size: 3.1rem; }
+  .section-intro { font-size: 1.08rem; }
+  .stats-row { margin-bottom: 32px; }
+  .stat-num { font-size: 2rem; }
+  .form-wrap { padding: 24px 18px; }
+}
+
+/* =========================================================
+   REDUCED MOTION
+   ========================================================= */
+@media (prefers-reduced-motion: reduce) {
+  .map-button {
+    transition: none;
+  }
+}
+
 </style>

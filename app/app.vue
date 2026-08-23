@@ -8,7 +8,7 @@
       <div v-if="!coverVisible">
         <HeroSection />
         <VerseSection />
-        <CoupleSection />
+        <Agenda />
         <EventDetails />
         <WishesSection />
         <AppFooter />

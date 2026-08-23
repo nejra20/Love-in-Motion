@@ -10,34 +10,19 @@
         <div class="gold-line" />
       </div>
 
-      <p class="serif-heading" style="font-size:0.75rem;color:rgba(245,240,232,0.4);letter-spacing:0.2em;text-transform:uppercase;margin-bottom:28px">
-        Terima Kasih
-      </p>
-
       <!-- Couple photo -->
       <div class="footer-photo-wrap">
-        <img src="/images/couple.jpg" alt="Rizky & Anisa" class="footer-photo" @error="imgErr = true" />
+        <img src="/images/dove.png" alt="Riad & Nejra" class="footer-photo" @error="imgErr = true" />
         <div v-if="imgErr" class="footer-photo-fallback" />
       </div>
 
       <!-- Names -->
-      <p class="sec-label" style="color:rgba(201,169,110,0.55);margin-bottom:6px">KAMI YANG BERBAHAGIA</p>
-      <h2 class="script-heading" style="font-size:clamp(2rem,5vw,3rem);color:#f5f0e8;margin-bottom:20px">Rizky &amp; Anisa</h2>
-
-      <!-- Closing text -->
-      <p class="closing-text">
-        Merupakan suatu kebahagiaan dan kehormatan bagi kami, apabila Bapak/Ibu/Saudara/i berkenan hadir dan memberikan do'a restu kepada kami.
-      </p>
+      <p class="sec-label" style="color:#D49128;margin-bottom:6px">S ljubavlju</p>
+      <h2 class="script-heading" style="font-size:clamp(2rem,5vw,3rem);color:#f5f0e8;margin-bottom:20px">Riad &amp; Nejra</h2>
 
       <div class="divider-h" style="opacity:0.12;margin:28px auto;max-width:240px" />
 
-      <!-- Social -->
-      <div class="social-row">
-        <a href="#" class="social-btn" aria-label="Instagram"><Instagram :size="16" /></a>
-        <a href="#" class="social-btn" aria-label="WhatsApp"><MessageCircle :size="16" /></a>
-      </div>
-
-      <p class="made-with">Made with love · Love in Motion</p>
+      <p class="made-with">Made with love</p>
     </div>
   </footer>
 </template>
@@ -73,8 +58,7 @@ onMounted(() => {
 .texture-overlay {
   position: absolute;
   inset: 0;
-  background-image: url("data:image/svg+xml,%3Csvg width='80' height='80' viewBox='0 0 80 80' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%23c9a96e' fill-opacity='0.025'%3E%3Cpath d='M40 0L43 13H57L46 21L49 34L40 26L31 34L34 21L23 13H37L40 0Z'/%3E%3C/g%3E%3C/svg%3E");
-  pointer-events: none;
+   pointer-events: none;
 }
 
 .gold-divider {
@@ -94,11 +78,8 @@ onMounted(() => {
 .footer-photo-wrap {
   width: 140px;
   height: 140px;
-  border-radius: 50%;
   overflow: hidden;
   margin: 0 auto 24px;
-  border: 2px solid rgba(201,169,110,0.3);
-  box-shadow: 0 8px 40px rgba(0,0,0,0.5);
 }
 @media (min-width: 640px) {
   .footer-photo-wrap { width: 160px; height: 160px; }
@@ -109,20 +90,6 @@ onMounted(() => {
   object-fit: cover;
   object-position: center top;
   display: block;
-}
-.footer-photo-fallback {
-  width: 100%;
-  height: 100%;
-  background: linear-gradient(135deg, #5a1a1a 0%, #3d1010 100%);
-}
-
-.closing-text {
-  font-family: 'Poppins', sans-serif;
-  font-size: 0.75rem;
-  line-height: 1.9;
-  color: rgba(245,240,232,0.5);
-  max-width: 420px;
-  margin: 0 auto;
 }
 
 .social-row {
