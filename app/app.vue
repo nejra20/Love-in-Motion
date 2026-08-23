@@ -9,9 +9,7 @@
         <HeroSection />
         <VerseSection />
         <CoupleSection />
-        <LoveStory />
         <EventDetails />
-        <GiftSection />
         <WishesSection />
         <AppFooter />
       </div>

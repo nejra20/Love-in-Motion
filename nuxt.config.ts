@@ -13,9 +13,9 @@ export default defineNuxtConfig({
   app: {
     baseURL: process.env.NUXT_APP_BASE_URL ?? '/',
     head: {
-      title: 'Rizky & Anisa - Wedding Invitation',
+      title: 'Riad & Nejra',
       meta: [
-        { name: 'description', content: 'Undangan Pernikahan Rizky & Anisa, 14 Februari 2026' },
+        { name: 'description', content: 'Vjenčanje Riada & Nejre, 17 Oktobar 2026' },
         { name: 'viewport', content: 'width=device-width, initial-scale=1' },
       ],
       link: [

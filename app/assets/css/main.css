@@ -150,7 +150,7 @@
   .input-cream:focus { border-color: #c9a96e; box-shadow: 0 0 0 3px rgba(201,169,110,0.12); }
   .input-cream::placeholder { color: rgba(61,16,16,0.32); }
 
-  /* Gold ornament dots */
+  /* Cram ornament dots */
   .ornament {
     display: flex;
     align-items: center;
@@ -159,12 +159,12 @@
   }
   .ornament::before, .ornament::after {
     content: '';
-    height: 1px;
+    height: 2px;
     width: 48px;
-    background: linear-gradient(to right, transparent, #c9a96e);
+    background: linear-gradient(to right, transparent, #f5e6c8);
   }
   .ornament::after {
-    background: linear-gradient(to left, transparent, #c9a96e);
+    background: linear-gradient(to left, transparent, #f5e6c8);
   }
 }
 

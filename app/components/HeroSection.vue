@@ -2,20 +2,20 @@
   <section class="hero section-dark">
     <!-- Full-width hero image with overlay -->
     <div class="hero-banner" ref="bannerEl">
-      <img src="/images/couple.jpg" alt="Rizky & Anisa" class="hero-banner-img" @error="imgErr = true" />
+      <img src="/images/backdrop1.jpg" alt="Riad & Nejra" class="hero-banner-img" @error="imgErr = true" />
       <div v-if="imgErr" class="hero-banner-fallback" />
       <div class="hero-banner-overlay" />
 
       <!-- Text overlay on image for mobile -->
       <div class="hero-banner-text">
-        <p class="sec-label" style="color:rgba(201,169,110,0.8);margin-bottom:8px">THE WEDDING OF</p>
+        <p class="sec-label" style="color:#D49128;margin-bottom:8px">Pozivamo Vas na vjenčanje</p>
         <div class="monogram">
           <span>R</span>
           <span class="sep">|</span>
-          <span>A</span>
+          <span>N</span>
         </div>
-        <p class="serif-heading hero-names">Rizky &amp; Anisa</p>
-        <p class="sec-label" style="color:rgba(201,169,110,0.6);letter-spacing:0.25em;margin-top:6px">14 · 02 · 2026</p>
+        <p class="serif-heading hero-names">Riada &amp; Nejre</p>
+        <p class="sec-label" style="color:#D49128;letter-spacing:0.25em;margin-top:6px">17 · 10 · 2026</p>
       </div>
     </div>
 
@@ -24,8 +24,8 @@
       <div class="inner" style="padding-top:48px;padding-bottom:56px">
         <!-- Ornament -->
         <div class="ornament" style="margin-bottom:32px">
-          <svg width="10" height="10" viewBox="0 0 12 12" fill="#c9a96e" opacity="0.6">
-            <path d="M6 0L7.2 4.4H12L8.4 7.1L9.6 11.6L6 8.9L2.4 11.6L3.6 7.1L0 4.4H4.8L6 0Z"/>
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#f5e6c8" stroke-width="1.5" opacity="0.8">
+            <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
           </svg>
         </div>
 
@@ -48,12 +48,12 @@ const imgErr   = ref(false)
 const bannerEl = ref<HTMLElement>()
 const countEl  = ref<HTMLElement>()
 
-const WEDDING = new Date('2026-02-14T08:00:00')
+const WEDDING = new Date('2026-10-17T08:00:00')
 const countdown = ref([
-  { label: 'Hari',  value: '000' },
-  { label: 'Jam',   value: '00' },
-  { label: 'Menit', value: '00' },
-  { label: 'Detik', value: '00' },
+  { label: 'Dani',  value: '00' },
+  { label: 'Sati',   value: '00' },
+  { label: 'Minute', value: '00' },
+  { label: 'Sekunde', value: '00' },
 ])
 
 function tick() {
@@ -63,10 +63,10 @@ function tick() {
   const m = Math.max(0, Math.floor((diff % 3600000) / 60000))
   const s = Math.max(0, Math.floor((diff % 60000) / 1000))
   countdown.value = [
-    { label: 'Hari',  value: String(d).padStart(3, '0') },
-    { label: 'Jam',   value: String(h).padStart(2, '0') },
-    { label: 'Menit', value: String(m).padStart(2, '0') },
-    { label: 'Detik', value: String(s).padStart(2, '0') },
+    { label: 'Dani',  value: String(d).padStart(3, '0') },
+    { label: 'Sati',   value: String(h).padStart(2, '0') },
+    { label: 'Minute', value: String(m).padStart(2, '0') },
+    { label: 'Sekunde', value: String(s).padStart(2, '0') },
   ]
 }
 
@@ -111,7 +111,7 @@ onUnmounted(() => clearInterval(timer))
 .hero-banner-fallback {
   width: 100%;
   height: 100%;
-  background: linear-gradient(160deg, #5a1a1a 0%, #2a080a 100%);
+  background: linear-gradient(160deg, #1c4329 0%, #0f2b1a 100%);
 }
 .hero-banner-overlay {
   position: absolute;
@@ -142,7 +142,7 @@ onUnmounted(() => clearInterval(timer))
   color: #f5f0e8;
 }
 .monogram .sep {
-  color: #c9a96e;
+  color: #D49128;
   font-size: 0.5em;
   margin-bottom: 8px;
   opacity: 0.8;
