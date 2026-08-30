@@ -5,9 +5,10 @@ export interface GuestFormData {
   email: string
   phone: string
   guestCount: number
+  companions: string[]
   dietaryRestrictions: string[]
-  songRequest: string
-  rsvpStatus: 'pending' | 'attending' | 'declined'
+  wishes: string
+  rsvpStatus: 'U obradi' | 'Dolazim' | 'Ne dolazim'
   timestamp: number
 }
 
@@ -19,9 +20,10 @@ const defaultForm = (): GuestFormData => ({
   email: '',
   phone: '',
   guestCount: 1,
-  dietaryRestrictions: [],
-  songRequest: '',
-  rsvpStatus: 'pending',
+  companions: [] as string[],
+  dietaryRestrictions: [] as string[],
+  wishes: '',
+  rsvpStatus: 'U obradi',
   timestamp: Date.now(),
 })
 
@@ -89,10 +91,6 @@ export const useGuestStore = defineStore('guest', () => {
     return `${mins} minutes ago`
   })
 
-  // Submission tallies — would be real counts from a backend in production
-  const attendingCount = ref(0)
-  const declinedCount  = ref(0)
-
   return {
     form,
     lastSaved,
@@ -100,8 +98,6 @@ export const useGuestStore = defineStore('guest', () => {
     isSubmitting,
     submitSuccess,
     submitError,
-    attendingCount,
-    declinedCount,
     hydrate,
     saveToCache,
     updateField,

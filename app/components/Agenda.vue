@@ -31,20 +31,60 @@
             <h3 class="event-title">
               {{ item.title }}
             </h3>
+
+            <p v-if="item.description" class="event-description">
+              {{ item.description }}
+            </p>
           </div>
         </div>
       </div>
+
+      <!-- Napomena o alergijama -->
+      <div class="agenda-footer">
+        <span class="footer-ornament">✦</span>
+        <p class="agenda-note">
+          Molimo vas da <strong>na vrijeme prijavite</strong> sve alergije i prehrambene restrikcije kako bismo vam mogli prilagoditi jelovnik.
+        </p>
+        <span class="footer-ornament">✦</span>
+      </div>
+
     </div>
   </section>
 </template>
 
 <script setup>
 const agendaItems = [
-  { time: '12:30h', title: 'Polazak svatova' },
-  { time: '13:30h', title: 'Opštinsko vjenčanje' },
-  { time: '14:30h', title: 'Šerijetsko vjenčanje' },
-  { time: '15:00h', title: 'Slikanje mladenaca' },
-  { time: '18:00h', title: 'Svadbena večera' },
+  {
+    time: '18:00h',
+    title: 'Dolazak gostiju u hotel'
+  },
+  {
+    time: '18:15h',
+    title: 'Posluga pića',
+    description: 'Dobrodošlica uz bezalkoholno piće'
+  },
+  {
+    time: '18:45h',
+    title: 'Svečani ulazak mladenaca'
+  },
+  {
+    time: '19:00h',
+    title: 'Početak posluživanja večere',
+    description: 'Bečko posluživanje - Suho meso, sudžuka, razne vrste sireva, masline, orašasti plodovi, pita - Begova čorba, Kombinacija pečeni teleći odrezak, pileći file u sosu od šampinjona sa restanim\n' +
+        'krompirom i torticom od grilovanog povrća'
+  },
+  {
+    time: '20:00h',
+    title: 'Prvi ples mladenaca'
+  },
+  {
+    time: '20:30h',
+    title: 'Posluživanje torte'
+  },
+  {
+    time: '22:00h',
+    title: 'Kraj muzičkog programa'
+  },
 ];
 </script>
 
@@ -274,6 +314,18 @@ const agendaItems = [
   color: #14311f;
 }
 
+.event-description {
+  margin: 6px 0 0 0;
+
+  font-family: 'Montserrat', sans-serif;
+  font-size: 11px;
+  font-weight: 300;
+
+  line-height: 1.5;
+
+  color: rgba(20, 49, 31, 0.6);
+}
+
 
 /* =========================================================
    FOOTER
@@ -286,7 +338,11 @@ const agendaItems = [
 
   gap: 14px;
 
-  margin-top: 20px;
+  margin-top: 30px;
+  padding: 24px 20px;
+
+  border-top: 1px solid rgba(212, 145, 40, 0.15);
+  border-bottom: 1px solid rgba(212, 145, 40, 0.15);
 }
 
 .agenda-note {
@@ -295,14 +351,19 @@ const agendaItems = [
   margin: 0;
 
   font-family: 'Cormorant Garamond', serif;
-  font-size: 1.25rem;
+  font-size: 1.15rem;
   font-style: italic;
   font-weight: 400;
 
-  line-height: 1.35;
+  line-height: 1.4;
   text-align: center;
 
-  color: rgba(20, 49, 31, 0.68);
+  color: rgba(20, 49, 31, 0.75);
+}
+
+.agenda-note strong {
+  color: #d49128;
+  font-weight: 600;
 }
 
 .footer-ornament {
@@ -377,17 +438,24 @@ const agendaItems = [
     font-size: 1.6rem;
   }
 
+  .event-description {
+    font-size: 10px;
+  }
+
   .agenda-footer {
-    gap: 9px;
-    margin-top: 12px;
+    flex-direction: column;
+    gap: 12px;
+
+    padding: 20px 16px;
+    margin-top: 20px;
   }
 
   .agenda-note {
-    font-size: 1.12rem;
+    font-size: 1.05rem;
   }
 
   .footer-ornament {
-    font-size: 7px;
+    display: none;
   }
 }
 
@@ -412,7 +480,7 @@ const agendaItems = [
   }
 
   .agenda-note {
-    font-size: 1.05rem;
+    font-size: 1rem;
   }
 }
 

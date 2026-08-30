@@ -13,8 +13,9 @@ export async function sendRSVP(data: {
   email: string
   phone: string
   guestCount: number
+  companions: string[]
   dietaryRestrictions: string[]
-  songRequest: string
+  wishes: string
   rsvpStatus: string
 }) {
   return emailjs.send(SERVICE_ID, TEMPLATE_ID, {
@@ -22,9 +23,11 @@ export async function sendRSVP(data: {
     from_email: data.email,
     phone: data.phone || '-',
     guest_count: data.guestCount,
-    dietary: data.dietaryRestrictions.join(', ') || 'None',
-    song: data.songRequest || '-',
+    companions: data.companions.join(', ') || 'Nema pratnju',
+    dietary: data.dietaryRestrictions.join(', ') || 'Nema',
+    wishes: data.wishes || '-',
     rsvp_status: data.rsvpStatus,
-    submission_date: new Date().toLocaleString('id-ID'),
+    submission_date: new Date().toLocaleString('bs-BA'),
   })
+
 }

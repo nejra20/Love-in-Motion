@@ -7,7 +7,7 @@
 
       <!-- HEADER -->
       <header class="section-header">
-        <p class="eyebrow">Rezervišite datum</p>
+        <p class="eyebrow">Sačuvajte datum</p>
 
         <div class="heading-row">
           <span class="heading-line"></span>
@@ -107,7 +107,7 @@
         <div class="map-heading">
           <div>
             <span class="map-eyebrow">Gdje se vidimo</span>
-            <h3 class="map-title">Restoran Pino Nature</h3>
+            <h3 class="map-title">Hotel Ibis Styles Sarajevo</h3>
           </div>
 
           <button
@@ -122,14 +122,14 @@
 
         <div class="map-frame">
           <iframe
-              src="https://www.google.com/maps?q=Pino+Nature+Hotel+Trebevic+Sarajevo&output=embed"
+              src="https://www.google.com/maps?q=Hotel+Ibis+Styles+Sarajevo+Nedzarici&output=embed"
               width="100%"
               height="100%"
               style="border:0"
               allowfullscreen
               loading="lazy"
               referrerpolicy="no-referrer-when-downgrade"
-              title="Mapa lokacije restorana Pino Nature"
+              title="Mapa lokacije hotela Ibis Styles Sarajevo"
           ></iframe>
 
           <div class="map-overlay"></div>
@@ -157,10 +157,10 @@ const events = [
     title: 'Svadbena večera',
     date: 'Subota, 17. oktobar 2026.',
     time: '18:00h',
-    venue: 'Restoran Pino Nature',
-    address: 'Ravne 1, Trebević, Sarajevo',
+    venue: 'Hotel Ibis Styles Sarajevo',
+    address: 'Nedžarići, Sarajevo',
     mapUrl:
-        'https://www.google.com/maps?q=Pino+Nature+Hotel+Trebevic+Sarajevo',
+        'https://www.google.com/maps?q=Hotel+Ibis+Styles+Sarajevo+Nedzarici',
   },
 ]
 
