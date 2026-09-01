@@ -78,11 +78,11 @@ const agendaItems = [
     title: 'Prvi ples mladenaca'
   },
   {
-    time: '20:30h',
+    time: '21:00h',
     title: 'Posluživanje torte'
   },
   {
-    time: '22:00h',
+    time: '23:00h',
     title: 'Kraj muzičkog programa'
   },
 ];

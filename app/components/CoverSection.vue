@@ -22,7 +22,7 @@
         </div>
 
         <p class="sec-label" style="color:#D49128;margin-bottom:10px">VJENČANJE</p>
-        <h1 class="serif-heading cover-names">Riada &amp; Nejre</h1>
+        <h1 class="serif-heading cover-names">Nejre &amp; Riada</h1>
         <p class="cover-date sec-label">17 · 10 · 2026</p>
 
         <div class="divider-h" style="opacity:0.18;margin:24px 0" />

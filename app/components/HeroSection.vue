@@ -2,7 +2,7 @@
   <section class="hero section-dark">
     <!-- Full-width hero image with overlay -->
     <div class="hero-banner" ref="bannerEl">
-      <img src="/images/backdrop1.jpg" alt="Riad & Nejra" class="hero-banner-img" @error="imgErr = true" />
+      <img src="/images/backdrop1.jpg" alt="Nejra & Riad" class="hero-banner-img" @error="imgErr = true" />
       <div v-if="imgErr" class="hero-banner-fallback" />
       <div class="hero-banner-overlay" />
 
@@ -10,11 +10,11 @@
       <div class="hero-banner-text">
         <p class="sec-label" style="color:#D49128;margin-bottom:8px">Pozivamo Vas na vjenčanje</p>
         <div class="monogram">
-          <span>R</span>
-          <span class="sep">|</span>
           <span>N</span>
+          <span class="sep">|</span>
+          <span>R</span>
         </div>
-        <p class="serif-heading hero-names" style="color:#f5f0e8">Riada &amp; Nejre</p>
+        <p class="serif-heading hero-names" style="color:#f5f0e8">Nejre &amp; Riada</p>
         <p class="sec-label" style="color:#D49128;letter-spacing:0.25em;margin-top:6px">17 · 10 · 2026</p>
       </div>
     </div>

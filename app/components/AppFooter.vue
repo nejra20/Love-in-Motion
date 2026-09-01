@@ -12,13 +12,13 @@
 
       <!-- Couple photo -->
       <div class="footer-photo-wrap">
-        <img src="/images/dove.png" alt="Riad & Nejra" class="footer-photo" @error="imgErr = true" />
+        <img src="/images/dove.png" alt="Nejra & Riad" class="footer-photo" @error="imgErr = true" />
         <div v-if="imgErr" class="footer-photo-fallback" />
       </div>
 
       <!-- Names -->
       <p class="sec-label" style="color:#D49128;margin-bottom:6px">S ljubavlju</p>
-      <h2 class="script-heading" style="font-size:clamp(2rem,5vw,3rem);color:#f5f0e8;margin-bottom:20px">Riad &amp; Nejra</h2>
+      <h2 class="script-heading" style="font-size:clamp(2rem,5vw,3rem);color:#f5f0e8;margin-bottom:20px">Nejra & Riad</h2>
 
       <div class="divider-h" style="opacity:0.12;margin:28px auto;max-width:240px" />
 
